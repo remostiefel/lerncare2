@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="de">
+   <link rel="stylesheet" href="styles.css?v=1">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lehrerfragebogen</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Lehrerfragebogen</h1>
+        
+        <div class="question-block">
+            <h2>Kapitel 1: Hohe Arbeitsbelastung</h2>
+            <p>Frage 1.1: Wie sehr spüren Sie die erhöhte Arbeitsbelastung vor den Ferien?</p>
+            <div class="options">
+                <button onclick="toggleOption(this)" data-details="Sie fühlen sich überwältigt und erschöpft, da die Menge an Korrekturarbeiten und administrativen Aufgaben zunimmt. Zeitmanagement fällt schwer, und es bleibt kaum Raum für Pausen.">Starke Belastung</button>
+                <button onclick="toggleOption(this)" data-details="Sie haben eine gewisse Arbeitsbelastung, aber durch strukturierte Zeitplanung und Unterstützung von Kollegen bleibt die Situation unter Kontrolle. Es gibt jedoch wenig Spielraum für unerwartete Aufgaben.">Mässige Belastung</button>
+                <button onclick="toggleOption(this)" data-details="Dank einer gut etablierten Routine und wiederverwendbaren Materialien fühlen Sie sich vorbereitet und schaffen es, die Aufgaben effizient zu bewältigen, ohne grossen Stress zu erleben.">Geringe Belastung</button>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <p>Frage 1.2: Wie könnte ich meine Arbeitsweise so anpassen, dass der Vorbereitungsaufwand reduziert wird und dennoch die Qualität meines Unterrichts erhalten bleibt?</p>
+            <div class="options">
+                <button onclick="toggleOption(this)" data-details="Erstellen Sie wiederverwendbare Vorlagen für häufig verwendete Unterrichtsmaterialien, um Zeit bei der Vorbereitung zu sparen.">Verwendung von Unterrichtsvorlagen</button>
+                <button onclick="toggleOption(this)" data-details="Nutzen Sie differenzierte Aufgabenstellungen und Materialien, die mehrere Lernniveaus abdecken, um den Vorbereitungsaufwand zu reduzieren.">Differenzierter Unterricht</button>
+                <button onclick="toggleOption(this)" data-details="Teilen Sie Unterrichtsmaterialien und -ideen mit Kollegen, um den Aufwand der Materialerstellung zu verringern.">Kooperation mit Kollegen</button>
+            </div>
+            <div class="options">
+                <button onclick="toggleOption(this)" data-details="Verwenden Sie Lernmanagementsysteme und digitale Tools, um den Unterricht effizienter zu gestalten und die Vorbereitung zu vereinfachen.">Integration von Technologie</button>
+                <button onclick="toggleOption(this)" data-details="Konzentrieren Sie sich auf die zentralen Inhalte und Kompetenzen, um unnötigen Vorbereitungsaufwand zu vermeiden.">Priorisierung von Kernthemen</button>
+                <button onclick="toggleOption(this)" data-details="Fördern Sie selbstgesteuertes Lernen, bei dem Schüler stärker in die Unterrichtsgestaltung eingebunden werden und Sie als Lehrperson entlastet werden.">Schülerzentriertes Lernen</button>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <p>Frage 1.3: Was könnte mir helfen, einen realistischen Maßstab für die Qualität meiner Unterrichtsstunden zu setzen, um mich nicht durch überhöhte Ansprüche zu überlasten?</p>
+            <div class="options">
+                <button onclick="toggleOption(this)" data-details="Bitten Sie Kollegen um konstruktives Feedback, um eine objektivere Einschätzung Ihrer Unterrichtsqualität zu erhalten.">Feedback von Kollegen</button>
+                <button onclick="toggleOption(this)" data-details="Entwickeln Sie eine regelmäßige Selbstreflexionspraxis, um Ihre Erwartungen und Leistungen realistisch zu bewerten.">Selbstreflexion</button>
+                <button onclick="toggleOption(this)" data-details="Nehmen Sie an Fortbildungen teil, um aktuelle Standards und realistische Erwartungen an den Unterricht kennenzulernen.">Fortbildung</button>
+            </div>
+            <div class="options">
+                <button onclick="toggleOption(this)" data-details="Sprechen Sie mit der Schulleitung über die Erwartungshaltung und bitten Sie um klare Richtlinien für die Unterrichtsqualität.">Gespräche mit der Schulleitung</button>
+                <button onclick="toggleOption(this)" data-details="Nutzen Sie die offiziellen Lehrpläne und Bildungsstandards als Maßstab, um die Qualität und den Fokus Ihres Unterrichts zu bewerten.">Vergleich mit Lehrplänen</button>
+                <button onclick="toggleOption(this)" data-details="Definieren Sie spezifische, messbare Ziele für Ihren Unterricht, um Ihre Ansprüche an die Unterrichtsqualität zu konkretisieren.">Etablierung von Zielkriterien</button>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <p>Frage 1.4: Wie gehen Sie mit der hohen Arbeitsbelastung als Lehrperson um?</p>
+            <div class="options">
+                <button onclick="toggleOption(this)" data-details="Planung und Priorisierung von Aufgaben, um Arbeitslast zu reduzieren.">Effizientes Zeitmanagement</button>
+                <button onclick="toggleOption(this)" data-details="Abgabe von Aufgaben an Kollegen oder Assistenten, um die eigene Last zu mindern.">Delegation</button>
+                <button onclick="toggleOption(this)" data-details="Klare Trennung zwischen Arbeitszeit und Freizeit, um Erholung zu gewährleisten.">Grenzen setzen</button>
+            </div>
+            <div class="options">
+                <button onclick="toggleOption(this)" data-details="Nutzung von Tools und Techniken, um wiederkehrende Aufgaben effizienter zu erledigen.">Automatisierung von Routineaufgaben</button>
+                <button onclick="toggleOption(this)" data-details="Integration von regelmässigen Pausen und Erholungsphasen in den Arbeitsalltag.">Selbstfürsorge</button>
+                <button onclick="toggleOption(this)" data-details="Inanspruchnahme von Beratung oder Coaching, um mit der Arbeitsbelastung besser umzugehen.">Professionelle Unterstützung</button>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <p>Frage 1.5: Wie wirkt sich die aktuelle Arbeitsbelastung auf meine Gesundheit und mein Wohlbefinden aus?</p>
+            <div class="options">
+                <button onclick="toggleOption(this)" data-details="Stellen Sie fest, dass Sie sich dauerhaft erschöpft fühlen und es Ihnen schwerfällt, sich zu erholen.">Ständige Müdigkeit</button>
+                <button onclick="toggleOption(this)" data-details="Beobachten Sie körperliche und emotionale Stresssymptome wie Anspannung, Reizbarkeit oder Schlafstörungen.">Erhöhte Stresssymptome</button>
+                <button onclick="toggleOption(this)" data-details="Bemerken Sie einen Rückgang Ihrer Motivation und Begeisterung für die Arbeit, was zu geringerer Zufriedenheit führt.">Verminderte Motivation</button>
+            </div>
+            <div class="options">
+                <button onclick="toggleOption(this)" data-details="Merken Sie, dass Sie weniger Zeit und Energie für soziale Kontakte haben, was Ihr Wohlbefinden beeinträchtigt.">Soziale Isolation</button>
+                <button onclick="toggleOption(this)" data-details="Achten Sie auf vermehrte gesundheitliche Beschwerden, wie häufige Kopfschmerzen, Rückenschmerzen oder Magenprobleme.">Gesundheitliche Beschwerden</button>
+                <button onclick="toggleOption(this)" data-details="Erkennen Sie, dass Ihre Arbeit zunehmend in Ihr Privatleben eindringt und Ihre Freizeit beeinträchtigt.">Verlust der Work-Life-Balance</button>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <p>Frage 1.6: Welche Maßnahmen könnte ich ergreifen, um diese Belastung zu verringern?</p>
+            <div class="options">
+                <button onclick="toggleOption(this)" data-details="Setzen Sie klare Grenzen zwischen Arbeit und Freizeit, um Ihre Erholung sicherzustellen.">Work-Life-Balance stärken</button>
+                <button onclick="toggleOption(this)" data-details="Übertragen Sie Aufgaben, die nicht zwingend von Ihnen erledigt werden müssen, auf Kollegen oder andere Unterstützungskräfte.">Delegation</button>
+                <button onclick="toggleOption(this)" data-details="Integrieren Sie regelmäßige Aktivitäten zur Selbstfürsorge, wie Sport, Entspannungstechniken oder Hobbys, in Ihren Alltag.">Selbstfürsorge fördern</button>
+            </div>
+            <div class="options">
+                <button onclick="toggleOption(this)" data-details="Ziehen Sie in Betracht, professionelle Unterstützung durch einen Coach oder Berater in Anspruch zu nehmen.">Professionelle Hilfe suchen</button>
+                <button onclick="toggleOption(this)" data-details="Optimieren Sie Ihre Arbeitsorganisation, um effizienter zu arbeiten und so Ihre Arbeitszeit zu verkürzen.">Organisation verbessern</button>
+                <button onclick="toggleOption(this)" data-details="Sprechen Sie mit der Schulleitung über Möglichkeiten zur Arbeitsentlastung, wie zusätzliche Unterstützung oder Anpassung der Arbeitslast.">Schulinterne Ressourcen nutzen</button>
+            </div>
+        </div>
+
+        <button class="reset" onclick="resetSelection()">Auswahl löschen</button>
+    </div>
+    <div id="details" class="details"></div>
+    <script src="script.js"></script>
+</body>
+</html>
