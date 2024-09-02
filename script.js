@@ -1,84 +1,187 @@
-const stats = {
-    PER: 0, RES: 0, SOZ: 0, PLN: 0, ARB: 0, FUH: 0, UNT: 0, EIN: 0, LEI: 0, PRO: 0, SEL: 0, EMO: 0, WID: 0
+let selectedOptions = {
+    question1: 0,
+    question2: [],
+    question3: [],
+    question4: [],
+    question5: [],
+    question6: []
+};
+
+let stats = {
+    PER: 0, RES: 0, SOZ: 0, MOT: 0, KOG: 0, DID: 0
 };
 
 function toggleOption(button) {
-    button.classList.toggle('selected');
-    updateStats(button);
-}
+    const questionBlock = button.closest('.question-block');
+    const questionIndex = Array.from(document.querySelectorAll('.question-block')).indexOf(questionBlock) + 1;
+    const optionIndex = Array.from(questionBlock.querySelectorAll('button')).indexOf(button) + 1;
 
-function updateStats(button) {
-    const option = button.textContent;
-    const isSelected = button.classList.contains('selected');
-
-    // Reset stats for this option
-    Object.keys(stats).forEach(key => stats[key] -= getStatChanges(option)[key] || 0);
-
-    // If selected, apply stats
-    if (isSelected) {
-        Object.keys(stats).forEach(key => stats[key] += getStatChanges(option)[key] || 0);
+    if (questionIndex === 1) {
+        // Für Frage 1: Nur eine Option auswählbar
+        questionBlock.querySelectorAll('button').forEach(btn => btn.classList.remove('selected'));
+        if (selectedOptions.question1 === optionIndex) {
+            selectedOptions.question1 = 0;
+            button.classList.remove('selected');
+        } else {
+            selectedOptions.question1 = optionIndex;
+            button.classList.add('selected');
+        }
+    } else {
+        // Für alle anderen Fragen: Mehrere Optionen auswählbar
+        button.classList.toggle('selected');
+        const questionKey = `question${questionIndex}`;
+        const optionPosition = selectedOptions[questionKey].indexOf(optionIndex);
+        if (optionPosition > -1) {
+            selectedOptions[questionKey].splice(optionPosition, 1);
+        } else {
+            selectedOptions[questionKey].push(optionIndex);
+        }
     }
 
-    console.log(stats); // For debugging, remove in production
+    console.log(`Frage ${questionIndex}, Option ${optionIndex} wurde geklickt`);
+    console.log('Aktuelle Auswahl:', selectedOptions);
+
+    updateStats();
 }
 
-function getStatChanges(option) {
-    const changes = {
-        "Ständige Müdigkeit": { WID: -1, SEL: -1 },
-        "Erhöhte Stresssymptome": { EMO: -1, WID: -1 },
-        "Verminderte Motivation": { LEI: -1, EMO: -1 },
-        "Soziale Isolation": { SOZ: -1, EIN: -1 },
-        "Gesundheitliche Beschwerden": { WID: -1, EMO: -1 },
-        "Verlust der Work-Life-Balance": { ARB: 1, PLN: 1 },
-        "Work-Life-Balance stärken": { ARB: 1, PLN: 1 },
-        "Delegation": { FUH: 1, SOZ: 1 },
-        "Selbstfürsorge fördern": { EIN: 1, EMO: 1 },
-        "Professionelle Hilfe suchen": { SEL: 1, PRO: 1 },
-        "Organisation verbessern": { ARB: 1, PLN: 1 },
-        "Schulinterne Ressourcen nutzen": { FUH: 1, LEI: 1 }
+function getStatChanges(question, option) {
+    const statChanges = {
+        question1: {
+            1: { PER: -2, RES: -3, SOZ: -1, MOT: -3 },
+            2: { PER: 2, RES: 1, SOZ: 2 },
+            3: { PER: 3, RES: 2 }
+        },
+        question2: {
+            1: { PER: 3, KOG: 2, MOT: 1 },
+            2: { RES: 2, SOZ: 3 },
+            3: { PER: 2, RES: 3, MOT: -1 },
+            4: { PER: 2, KOG: 3, MOT: 1 },
+            5: { PER: 2, RES: 4, MOT: 2 },
+            6: { RES: 3, SOZ: 2, MOT: 1 }
+        },
+        question3: {
+            1: { PER: 2, KOG: 2, MOT: 1 },
+            2: { PER: 1, KOG: 1, SOZ: 3 },
+            3: { PER: 2, RES: 1, SOZ: 2 },
+            4: { PER: 2, KOG: 3, MOT: 1 },
+            5: { PER: 3, KOG: 2, MOT: 2 },
+            6: { PER: 1, KOG: 2, SOZ: 3 }
+        },
+        question4: {
+            1: { KOG: 1, SOZ: 4, MOT: 2 },
+            2: { PER: 2, KOG: 3, MOT: 2 },
+            3: { PER: 3, KOG: 2, MOT: 3 },
+            4: { PER: 1, SOZ: 3, MOT: 2 },
+            5: { PER: 2, KOG: 2, MOT: 1 },
+            6: { PER: 3, KOG: 2, MOT: 2 }
+        },
+        question5: {
+            1: { PER: -3, RES: -3, SOZ: -1, MOT: -3 },
+            2: { PER: -2, RES: -2, SOZ: -1, MOT: -2 },
+            3: { PER: -2, RES: -2, SOZ: -1, MOT: -3 },
+            4: { PER: -1, RES: -1, SOZ: -3, MOT: -2 },
+            5: { PER: -2, RES: -3, SOZ: -1, MOT: -2 },
+            6: { PER: -3, RES: -3, SOZ: -1, MOT: -3 }
+        },
+        question6: {
+            1: { PER: 4, RES: 4, MOT: 3 },
+            2: { KOG: 2, RES: 3, SOZ: 3 },
+            3: { PER: 3, RES: 4, MOT: 3 },
+            4: { PER: 2, KOG: 1, RES: 3, SOZ: 1, MOT: 2 },
+            5: { PER: 3, KOG: 3, MOT: 2 },
+            6: { PER: 1, RES: 2, SOZ: 3 }
+        }
     };
-    return changes[option] || {};
+
+    return statChanges[question]?.[option] || {};
+}
+
+function updateStats() {
+    console.log("updateStats wurde aufgerufen");
+
+    Object.keys(stats).forEach(key => stats[key] = 0);
+
+    Object.entries(selectedOptions).forEach(([question, options]) => {
+        const optionsArray = Array.isArray(options) ? options : [options];
+        optionsArray.forEach(option => {
+            if (option !== 0) {
+                const changes = getStatChanges(question, option);
+                Object.entries(changes).forEach(([stat, value]) => {
+                    if (stats.hasOwnProperty(stat)) {
+                        stats[stat] += value;
+                    }
+                });
+            }
+        });
+    });
+
+    displayStats();
+    console.log('Aktuelle Statistiken:', stats);
+}
+
+function displayStats() {
+    const statsDisplay = document.getElementById('statsDisplay');
+    if (statsDisplay) {
+        statsDisplay.innerHTML = Object.entries(stats)
+            .map(([key, value]) => `<p>${key}: ${value}</p>`)
+            .join('');
+    }
 }
 
 function resetSelection() {
-    document.querySelectorAll('button').forEach(btn => btn.classList.remove('selected'));
+    document.querySelectorAll('.question-block button').forEach(btn => btn.classList.remove('selected'));
+    Object.keys(selectedOptions).forEach(key => {
+        selectedOptions[key] = key === 'question1' ? 0 : [];
+    });
     Object.keys(stats).forEach(key => stats[key] = 0);
+    displayStats();
 }
 
-// Show details on hover
-document.querySelectorAll('button').forEach(button => {
-    button.addEventListener('mouseover', function(e) {
-        const details = this.getAttribute('data-details');
-        const detailsElement = document.getElementById('details');
-        detailsElement.textContent = details;
-        detailsElement.style.display = 'block';
-
-        // Position the details above the button
-        const rect = this.getBoundingClientRect();
-        detailsElement.style.left = rect.left + 'px';
-        detailsElement.style.top = (rect.top - detailsElement.offsetHeight - 10) + 'px';
+function initializeEventListeners() {
+    document.querySelectorAll('.question-block button').forEach(button => {
+        button.addEventListener('click', function() {
+            toggleOption(this);
+        });
     });
 
-    button.addEventListener('mouseout', function() {
-        document.getElementById('details').style.display = 'none';
-    });
-    document.querySelectorAll('button').forEach(button => {
-        button.addEventListener('mouseover', function(e) {
+    document.querySelector('.reset').addEventListener('click', resetSelection);
+
+    document.querySelectorAll('.question-block button').forEach(button => {
+        button.addEventListener('mouseover', function() {
             const details = this.getAttribute('data-details');
             const detailsElement = document.getElementById('details');
-            detailsElement.textContent = details;
-            detailsElement.style.display = 'block';
-
-            // Position the details above the button
-            const rect = this.getBoundingClientRect();
-            const detailsRect = detailsElement.getBoundingClientRect();
-
-            detailsElement.style.left = `${rect.left + (rect.width / 2) - (detailsRect.width / 2)}px`;
-            detailsElement.style.top = `${rect.top - detailsRect.height - 10}px`;
+            if (detailsElement && details) {
+                detailsElement.textContent = details;
+                detailsElement.style.display = 'block';
+                positionDetails(this, detailsElement);
+            }
         });
 
         button.addEventListener('mouseout', function() {
-            document.getElementById('details').style.display = 'none';
+            const detailsElement = document.getElementById('details');
+            if (detailsElement) {
+                detailsElement.style.display = 'none';
+            }
         });
     });
+}
+
+function positionDetails(button, detailsElement) {
+    const rect = button.getBoundingClientRect();
+    const detailsRect = detailsElement.getBoundingClientRect();
+
+    let top = rect.top - detailsRect.height - 10;
+    const left = rect.left + (rect.width / 2) - (detailsRect.width / 2);
+
+    if (top < 0) {
+        top = rect.bottom + 10;
+    }
+
+    detailsElement.style.top = `${top + window.scrollY}px`;
+    detailsElement.style.left = `${left + window.scrollX}px`;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    initializeEventListeners();
+    displayStats();
 });
