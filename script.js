@@ -8,7 +8,7 @@ let selectedOptions = {
 };
 
 let stats = {
-    PER: 0, RES: 0, SOZ: 0, MOT: 0, KOG: 0, DID: 0
+    PER: 5, RES: 5, SOZ: 5, MOT: 5, KOG: 5, DID: 5
 };
 
 function toggleOption(button) {
@@ -99,7 +99,8 @@ function getStatChanges(question, option) {
 function updateStats() {
     console.log("updateStats wurde aufgerufen");
 
-    Object.keys(stats).forEach(key => stats[key] = 0);
+    // Setze alle Stats auf 5 zurück
+    Object.keys(stats).forEach(key => stats[key] = 5);
 
     Object.entries(selectedOptions).forEach(([question, options]) => {
         const optionsArray = Array.isArray(options) ? options : [options];
@@ -120,12 +121,13 @@ function updateStats() {
 }
 
 function displayStats() {
-    const statsDisplay = document.getElementById('statsDisplay');
-    if (statsDisplay) {
-        statsDisplay.innerHTML = Object.entries(stats)
-            .map(([key, value]) => `<p>${key}: ${value}</p>`)
-            .join('');
-    }
+    const statsOrder = ['PER', 'RES', 'SOZ', 'MOT', 'KOG', 'DID'];
+    statsOrder.forEach(stat => {
+        const statElement = document.getElementById(stat);
+        if (statElement) {
+            statElement.textContent = stats[stat];
+        }
+    });
 }
 
 function resetSelection() {
@@ -133,7 +135,7 @@ function resetSelection() {
     Object.keys(selectedOptions).forEach(key => {
         selectedOptions[key] = key === 'question1' ? 0 : [];
     });
-    Object.keys(stats).forEach(key => stats[key] = 0);
+    Object.keys(stats).forEach(key => stats[key] = 5);
     displayStats();
 }
 
@@ -164,6 +166,8 @@ function initializeEventListeners() {
             }
         });
     });
+
+    displayStats(); // Zeige die Anfangswerte an
 }
 
 function positionDetails(button, detailsElement) {
@@ -183,5 +187,4 @@ function positionDetails(button, detailsElement) {
 
 document.addEventListener('DOMContentLoaded', function() {
     initializeEventListeners();
-    displayStats();
 });
